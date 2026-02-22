@@ -3,94 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahayta - Connect & Grow</title>
+    <title>Sahayta - Connection Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .hidden { display: none; }
-    </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-slate-50 font-sans">
 
-    <nav class="bg-indigo-700 p-4 text-white shadow-md">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tight">Sahayta Portal</h1>
-            <span class="text-sm bg-indigo-800 px-3 py-1 rounded-full text-indigo-100">Community Support</span>
-        </div>
+    <nav class="bg-blue-800 p-4 text-white text-center font-bold text-2xl shadow-lg">
+        Sahayta: Communication Support
     </nav>
 
-    <header class="text-center py-16 px-4">
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Overcome Communication Barriers</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Connecting students struggling with stage fear and anxiety with experts who can provide real solutions.</p>
-    </header>
-
-    <main class="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl mb-20">
+    <div class="max-w-xl mx-auto mt-10 p-8 bg-white rounded-2xl shadow-2xl border border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Registration Form</h2>
         
-        <div class="mb-10">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Please select your role:</label>
-            <select id="roleSelector" onchange="toggleForm()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition">
-                <option value="">-- Choose Role --</option>
-                <option value="Learner">Student/Needy/Learner</option>
-                <option value="Expert">Expert/Trainer/Teacher</option>
-            </select>
-        </div>
-
-        <hr class="mb-10">
-
-        <div id="formContainer" class="hidden">
-            <h3 id="formTitle" class="text-2xl font-bold text-indigo-700 mb-6 underline">Registration Form</h3>
-            
-            <form action="YOUR_GOOGLE_FORM_ACTION_URL" method="POST" target="_self">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Full Name</label>
-                        <input type="text" name="entry.123456" required placeholder="John Doe" class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Contact Number</label>
-                        <input type="tel" name="entry.789101" required placeholder="+91 ..." class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Email ID</label>
-                        <input type="email" name="entry.112131" required placeholder="example@mail.com" class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
-                    </div>
-                    
-                    <input type="hidden" name="entry.415161" id="hiddenRole">
-
-                    <div class="md:col-span-2">
-                        <label id="detailLabel" class="block text-sm font-semibold text-gray-600 mb-1">Details of Issue</label>
-                        <textarea name="entry.171819" rows="4" required class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none" placeholder="Describe here..."></textarea>
-                    </div>
+        <form id="sahaytaForm">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Select Role</label>
+                    <select name="Role" id="role" required class="w-full p-3 border rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option value="">-- Choose --</option>
+                        <option value="Student/Learner">Student/Needy/Learner</option>
+                        <option value="Expert/Teacher">Expert/Trainer/Teacher</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="mt-8 w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg transform hover:-translate-y-1">
-                    Submit & Register
-                </button>
-            </form>
-        </div>
-    </main>
+                <div id="formFields" class="hidden space-y-4">
+                    <input type="text" name="Name" placeholder="Full Name" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="tel" name="Contact" placeholder="Contact Number" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="email" name="Email" placeholder="Email ID" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                    <textarea name="Detail" id="detailPlaceholder" rows="4" placeholder="Your issue..." required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition transform hover:scale-105">
+                        Submit Details
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div id="msg" class="mt-4 text-center font-semibold text-green-600"></div>
+    </div>
 
     <script>
-        function toggleForm() {
-            const role = document.getElementById('roleSelector').value;
-            const container = document.getElementById('formContainer');
-            const title = document.getElementById('formTitle');
-            const label = document.getElementById('detailLabel');
-            const hiddenRole = document.getElementById('hiddenRole');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzr27AzoZc7x1r7T0mMMI9ZBb5xZ-Kk_YC1B3r_uAwvZmzZWtpJ-Qco3ny1OH6GefArog/exec' // <-- Paste your URL here
+        const form = document.getElementById('sahaytaForm')
+        const roleSelect = document.getElementById('role')
+        const formFields = document.getElementById('formFields')
+        const detailPlaceholder = document.getElementById('detailPlaceholder')
 
-            if (role) {
-                container.classList.remove('hidden');
-                hiddenRole.value = role;
-                if (role === 'Expert') {
-                    title.innerText = "Expert/Trainer Registration";
-                    label.innerText = "Describe your expertise/services";
-                } else {
-                    title.innerText = "Learner/Student Registration";
-                    label.innerText = "What issues are you facing? (e.g. Stage fright)";
-                }
+        // Show/Hide fields based on role
+        roleSelect.addEventListener('change', () => {
+            if(roleSelect.value) {
+                formFields.classList.remove('hidden');
+                detailPlaceholder.placeholder = roleSelect.value === 'Expert/Teacher' ? "Explain your expertise..." : "Explain your communication issues...";
             } else {
-                container.classList.add('hidden');
+                formFields.classList.add('hidden');
             }
-        }
+        });
+
+        // Handle Submit
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            document.getElementById('submitBtn').disabled = true
+            document.getElementById('msg').innerHTML = "Submitting... Please wait."
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                document.getElementById('msg').innerHTML = "✅ Registered Successfully in Google Sheets!"
+                form.reset()
+                formFields.classList.add('hidden')
+                document.getElementById('submitBtn').disabled = false
+            })
+            .catch(error => {
+                document.getElementById('msg').innerHTML = "❌ Error! Try again."
+                console.error('Error!', error.message)
+                document.getElementById('submitBtn').disabled = false
+            })
+        })
     </script>
 </body>
 </html>
