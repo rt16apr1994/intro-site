@@ -163,7 +163,7 @@
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
                 msg.style.color = "#059669"
-                msg.innerHTML = "🎉 Registration Successful! We've saved your details."
+                msg.innerHTML = "🎉 Registration Successful! We've saved your details and will come within 1-3 working days."
                 form.reset()
                 formFields.classList.add('hidden')
                 submitBtn.disabled = false
@@ -178,3 +178,4 @@
     </script>
 </body>
 </html>
+
