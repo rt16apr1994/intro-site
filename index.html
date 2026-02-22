@@ -1,58 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kailasha Farm Forest</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background: #0073e6; color: white; padding: 20px; text-align: center; }
-    nav { background: #005bb5; padding: 10px; text-align: center; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    section { padding: 40px; background-color: greenyellow;}
-    footer { background: #333; color: white; text-align: center; padding: 15px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahayta - Connect & Grow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Welcome to Kailasha Farm Forest!</h1>
-    <p>Its time to enjoy the nature and exprince the best of your life with Kailasha Farm Forest</p>
-  </header>
+<body class="bg-gray-50 font-sans">
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <nav class="bg-indigo-700 p-4 text-white shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">Sahayta Portal</h1>
+            <span class="text-sm bg-indigo-800 px-3 py-1 rounded-full text-indigo-100">Community Support</span>
+        </div>
+    </nav>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>This is a simple informative website created to share details about our work, services, and contact information.</p>
-  </section>
+    <header class="text-center py-16 px-4">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Overcome Communication Barriers</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Connecting students struggling with stage fear and anxiety with experts who can provide real solutions.</p>
+    </header>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>Service 1: Project Details and insights.</li>
-      <li>Service 2: Site Visit and develoment details.</li>
-      <li>Service 3: Future scope with approved master plan.</li>
-    </ul>
-  </section>
+    <main class="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl mb-20">
+        
+        <div class="mb-10">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Please select your role:</label>
+            <select id="roleSelector" onchange="toggleForm()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                <option value="">-- Choose Role --</option>
+                <option value="Learner">Student/Needy/Learner</option>
+                <option value="Expert">Expert/Trainer/Teacher</option>
+            </select>
+        </div>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: rt.16apr1994@gmail.com</p>
-    <p>Phone: +91-8019861262</p>
-  </section>
+        <hr class="mb-10">
 
-  <footer>
-    <p>© 2025 My Informative Website</p>
-  </footer>
+        <div id="formContainer" class="hidden">
+            <h3 id="formTitle" class="text-2xl font-bold text-indigo-700 mb-6 underline">Registration Form</h3>
+            
+            <form action="YOUR_GOOGLE_FORM_ACTION_URL" method="POST" target="_self">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Full Name</label>
+                        <input type="text" name="entry.123456" required placeholder="John Doe" class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Contact Number</label>
+                        <input type="tel" name="entry.789101" required placeholder="+91 ..." class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Email ID</label>
+                        <input type="email" name="entry.112131" required placeholder="example@mail.com" class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none">
+                    </div>
+                    
+                    <input type="hidden" name="entry.415161" id="hiddenRole">
+
+                    <div class="md:col-span-2">
+                        <label id="detailLabel" class="block text-sm font-semibold text-gray-600 mb-1">Details of Issue</label>
+                        <textarea name="entry.171819" rows="4" required class="w-full p-3 border rounded-lg focus:bg-gray-50 outline-none" placeholder="Describe here..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="mt-8 w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 transition shadow-lg transform hover:-translate-y-1">
+                    Submit & Register
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function toggleForm() {
+            const role = document.getElementById('roleSelector').value;
+            const container = document.getElementById('formContainer');
+            const title = document.getElementById('formTitle');
+            const label = document.getElementById('detailLabel');
+            const hiddenRole = document.getElementById('hiddenRole');
+
+            if (role) {
+                container.classList.remove('hidden');
+                hiddenRole.value = role;
+                if (role === 'Expert') {
+                    title.innerText = "Expert/Trainer Registration";
+                    label.innerText = "Describe your expertise/services";
+                } else {
+                    title.innerText = "Learner/Student Registration";
+                    label.innerText = "What issues are you facing? (e.g. Stage fright)";
+                }
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
